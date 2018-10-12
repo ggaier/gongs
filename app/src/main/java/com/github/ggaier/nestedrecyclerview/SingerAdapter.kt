@@ -23,16 +23,19 @@ class SingersAdapter : ListAdapter<Singer, SingersAdapter.ViewHolder>(SingerDiff
 
         fun bind(item: Singer) {
             binding.singer = item
+            if (binding.albums.adapter == null) {
+                binding.albums.adapter = AlbumsAdapter()
+            }
+            (binding.albums.adapter as AlbumsAdapter).submitList(item.albums)
         }
 
     }
 
-}
+    private class SingerDiffCallback : DiffUtil.ItemCallback<Singer>() {
 
-class SingerDiffCallback : DiffUtil.ItemCallback<Singer>() {
+        override fun areItemsTheSame(oldItem: Singer, newItem: Singer): Boolean = oldItem.name == newItem.name
 
-    override fun areItemsTheSame(oldItem: Singer, newItem: Singer): Boolean = oldItem.name == newItem.name
-
-    override fun areContentsTheSame(oldItem: Singer, newItem: Singer): Boolean =
-            oldItem.name == newItem.name && oldItem.albums.size == newItem.albums.size
+        override fun areContentsTheSame(oldItem: Singer, newItem: Singer): Boolean =
+                oldItem.name == newItem.name && oldItem.albums.size == newItem.albums.size
+    }
 }
