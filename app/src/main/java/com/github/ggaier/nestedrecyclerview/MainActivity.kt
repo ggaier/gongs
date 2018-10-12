@@ -21,4 +21,5 @@ class MainActivity : AppCompatActivity() {
         })
         binding.singers.adapter = SingersAdapter()
     }
+
 }
