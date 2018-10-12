@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
 
 android {
     compileSdkVersion 28
@@ -38,6 +38,8 @@ dependencies {
     implementation "androidx.core:core-ktx:$androidktx_version"
 
 
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
+    implementation "com.github.bumptech.glide:glide:$glide_version"
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
 
 

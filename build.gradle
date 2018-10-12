@@ -8,6 +8,7 @@ buildscript {
         recycleview_version = '1.0.0'
         androidktx_version = '1.0.0'
         anko_version = '0.10.7'
+        glide_version = '4.8.0'
     }
     repositories {
         google()
