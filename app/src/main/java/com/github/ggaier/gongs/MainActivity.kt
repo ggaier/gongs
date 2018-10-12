@@ -1,11 +1,11 @@
-package com.github.ggaier.nestedrecyclerview
+package com.github.ggaier.gongs
 
 import android.graphics.drawable.ShapeDrawable
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.github.ggaier.nestedrecyclerview.databinding.ActivityMainBinding
+import com.github.ggaier.gongs.databinding.ActivityMainBinding
 import org.jetbrains.anko.dip
 
 class MainActivity : AppCompatActivity() {

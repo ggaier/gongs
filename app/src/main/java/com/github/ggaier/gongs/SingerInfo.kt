@@ -1,4 +1,4 @@
-package com.github.ggaier.nestedrecyclerview
+package com.github.ggaier.gongs
 
 /**
  * Created by wenbo, 2018/10/12

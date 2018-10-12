@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs"
 
 
 android {
@@ -36,6 +37,16 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$appcompat_version"
     implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
     implementation "androidx.core:core-ktx:$androidktx_version"
+    implementation "androidx.concurrent:concurrent-futures:$futures_version"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-rxjava2:$room_version"
+    implementation "androidx.paging:paging-runtime:$paging_version"
+    implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "android.arch.navigation:navigation-ui-ktx:$nav_version"
+    implementation "android.arch.work:work-runtime-ktx:$work_version"
+
 
 
     kapt "com.github.bumptech.glide:compiler:$glide_version"

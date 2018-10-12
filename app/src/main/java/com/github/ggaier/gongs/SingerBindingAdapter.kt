@@ -1,4 +1,4 @@
-package com.github.ggaier.nestedrecyclerview
+package com.github.ggaier.gongs
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter

@@ -1,11 +1,11 @@
-package com.github.ggaier.nestedrecyclerview
+package com.github.ggaier.gongs
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.github.ggaier.nestedrecyclerview.databinding.ListItemAlbumBinding
+import com.github.ggaier.gongs.databinding.ListItemAlbumBinding
 
 /**
  * Created by wenbo, 2018/10/12

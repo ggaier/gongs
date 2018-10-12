@@ -2,7 +2,7 @@
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.github.ggaier.nestedrecyclerview">
+    package="com.github.ggaier.gongs">
 
     <application
         android:allowBackup="false"
@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".MainActivity">
+        <activity android:name="com.github.ggaier.gongs.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
