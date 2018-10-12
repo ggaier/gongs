@@ -5,8 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.BaseViewHolder
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.dip
 
@@ -24,13 +22,5 @@ class MainActivity : AppCompatActivity() {
             })
             adapter = SingersAdapter()
         }
-    }
-
-    private class SingersAdapter : BaseQuickAdapter<Singer, BaseViewHolder>(R.layout.item_singer){
-
-        override fun convert(helper: BaseViewHolder?, item: Singer?) {
-            TODO("not implemented")
-        }
-
     }
 }

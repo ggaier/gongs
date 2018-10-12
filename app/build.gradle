@@ -14,6 +14,11 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    dataBinding {
+        enabled = true
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -33,7 +38,6 @@ dependencies {
     implementation "androidx.core:core-ktx:$androidktx_version"
 
 
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.42'
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
 
 
