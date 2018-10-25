@@ -1,6 +1,6 @@
 package com.github.ggaier.gongs.model
 
-import io.reactivex.Observable
+import kotlinx.coroutines.experimental.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -27,6 +27,6 @@ interface MusicBrainzApi{
      */
     @GET("artist/{mbid}")
     fun queryArtist(@Path("mbid") mbid: String,
-                    @Query("inc") inc: String = "releases"):Observable
+                    @Query("inc") inc: String = "releases"): Deferred<Artist>
 
 }
