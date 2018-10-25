@@ -5,9 +5,9 @@ import retrofit2.Retrofit
 
 /**
  * Created by wenbo, 2018/10/25
- * Dependencies provider.
+ * Dependency Injector
  */
-object DP {
+object DI {
 
     val apiInstance = Retrofit.Builder().baseUrl("https://musicbrainz.org/ws/2/")
         .addCallAdapterFactory(CoroutineCallAdapterFactory())

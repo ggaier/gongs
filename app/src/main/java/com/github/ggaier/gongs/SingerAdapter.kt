@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.github.ggaier.gongs.databinding.ListItemSingerBinding
-import com.github.ggaier.gongs.model.Artist
+import com.github.ggaier.gongs.vo.Artist
 
 /**
  * Created by wenbo, 2018/10/12

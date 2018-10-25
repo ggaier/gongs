@@ -1,4 +1,6 @@
-package com.github.ggaier.gongs.model
+package com.github.ggaier.gongs.vo
+
+import com.github.ggaier.gongs.api.ApiResponse
 
 /**
  * Created by wenbo, 2018/10/12

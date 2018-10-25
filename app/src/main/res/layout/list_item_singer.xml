@@ -5,7 +5,7 @@
 
         <variable
             name="singer"
-            type="com.github.ggaier.gongs.model.Artist"/>
+            type="com.github.ggaier.gongs.vo.Artist"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

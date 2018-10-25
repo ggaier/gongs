@@ -11,7 +11,7 @@
 
         <variable
             name="album"
-            type="com.github.ggaier.gongs.model.Album"/>
+            type="com.github.ggaier.gongs.vo.Album"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

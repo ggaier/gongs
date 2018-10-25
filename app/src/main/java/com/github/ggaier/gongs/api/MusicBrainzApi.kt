@@ -1,5 +1,6 @@
-package com.github.ggaier.gongs.model
+package com.github.ggaier.gongs.api
 
+import com.github.ggaier.gongs.vo.Artist
 import kotlinx.coroutines.experimental.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Path
