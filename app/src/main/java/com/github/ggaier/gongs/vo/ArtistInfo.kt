@@ -10,8 +10,7 @@ data class Artist(
     @SerializedName("name") val name: String,
     @SerializedName("gender") val gender: String,
     @SerializedName("type") val type: String,
-    @SerializedName("country") val country: String,
-    @SerializedName("releases") val albums: List<Album>
+    @SerializedName("country") val country: String
 )
 
 

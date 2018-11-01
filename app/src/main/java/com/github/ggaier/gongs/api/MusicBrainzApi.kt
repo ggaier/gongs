@@ -32,4 +32,16 @@ interface MusicBrainzApi {
         @Query("inc") inc: String = "releases"
     ): Deferred<Artist>
 
+    /**
+     * Get a list of collections for a given user. 
+     * @param the mbid of Collection
+     */
+    @GET("collection/{mbid}")
+    fun getMyCollection(
+        @Path("mbid") id: String,
+        @Query("editor") editor: String
+    ): Deferred<List<Artist>>
+
+
+
 }
