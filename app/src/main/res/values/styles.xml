@@ -8,4 +8,22 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="TextAppearance" parent=""/>
+
+    <style name="TextAppearance.Primary">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="TextAppearance.Primary.Normal">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextAppearance.Accent">
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="TextAppearance.Accent.Normal">
+        <item name="android:textSize">14sp</item>
+    </style>
+
 </resources>

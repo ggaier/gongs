@@ -1,38 +1,36 @@
 package com.github.ggaier.gongs
 
-import kotlinx.coroutines.experimental.coroutineScope
-import kotlinx.coroutines.experimental.delay
+import kotlinx.coroutines.experimental.CoroutineScope
 import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.experimental.newSingleThreadContext
 import kotlinx.coroutines.experimental.runBlocking
+import kotlin.system.measureTimeMillis
 
 /**
  * Created by wenbo, 2018/10/19
  */
-fun main(args: Array<String>) = runBlocking { // this: CoroutineScope
-    launch {
-        delay(200L)
-        println("Task from runBlocking")
-    }
-
-    coroutineScope { // Creates a new coroutine scope
-        launch {
-            delay(500L)
-            println("Task from nested launch")
+suspend fun CoroutineScope.massiveRun(action: suspend () -> Unit) {
+    val n = 100  // number of coroutines to launch
+    val k = 1000 // times an action is repeated by each coroutine
+    val time = measureTimeMillis {
+        val jobs = List(n) {
+            launch {
+                repeat(k) { action() }
+            }
         }
-
-        delay(100L)
-        println("Task from coroutine scope") // This line will be printed before nested launch
+        jobs.forEach { it.join() }
     }
-
-    println("Coroutine scope is over") // This line is not printed until nested launch completes
+    println("Completed ${n * k} actions in $time ms")
 }
 
-//fun main(args: Array<String>) = runBlocking {
-//    // this: CoroutineScope
-//    launch {
-//        // launch new coroutine in the scope of runBlocking
-//        delay(1000L)
-//        println("World!")
-//    }
-//    println("Hello,")
-//}
+val counterContext = newSingleThreadContext("counterContext")
+var counter = 0
+
+fun main(args: Array<String>) = runBlocking<Unit> {
+    //sampleStart
+    CoroutineScope(counterContext).massiveRun {
+        counter++
+    }
+    println("Counter = ${counter}")
+    //sampleEnd
+}
