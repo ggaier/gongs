@@ -31,11 +31,13 @@ class AlbumsAdapter : ListAdapter<Album, AlbumsAdapter.ViewHolder>(AlbumDiffCall
 
     private class AlbumDiffCallback : DiffUtil.ItemCallback<Album>(){
         override fun areItemsTheSame(oldItem: Album, newItem: Album): Boolean {
-            return oldItem.name == newItem.name
+//            return oldItem.name == newItem.name
+            return false
         }
 
         override fun areContentsTheSame(oldItem: Album, newItem: Album): Boolean {
-            return oldItem.cover == newItem.cover && oldItem.rating == newItem.rating
+//            return oldItem.cover == newItem.cover && oldItem.rating == newItem.rating
+            return false
         }
     }
 }

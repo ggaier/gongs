@@ -27,7 +27,7 @@ class SingersAdapter : ListAdapter<Artist, SingersAdapter.ViewHolder>(SingerDiff
             if (binding.albums.adapter == null) {
                 binding.albums.adapter = AlbumsAdapter()
             }
-            (binding.albums.adapter as AlbumsAdapter).submitList(item.albums)
+//            (binding.albums.adapter as AlbumsAdapter).submitList(item.)
         }
 
     }
@@ -36,7 +36,7 @@ class SingersAdapter : ListAdapter<Artist, SingersAdapter.ViewHolder>(SingerDiff
 
         override fun areItemsTheSame(oldItem: Artist, newItem: Artist): Boolean = oldItem.name == newItem.name
 
-        override fun areContentsTheSame(oldItem: Artist, newItem: Artist): Boolean =
-                oldItem.name == newItem.name && oldItem.albums.size == newItem.albums.size
+        override fun areContentsTheSame(oldItem: Artist, newItem: Artist): Boolean = false
+//                oldItem.name == newItem.name && oldItem.albums.size == newItem.albums.size
     }
 }
