@@ -1,7 +1,8 @@
 package com.github.ggaier.gongs.api
 
 import com.github.ggaier.gongs.vo.Artist
-import kotlinx.coroutines.experimental.Deferred
+import com.github.ggaier.gongs.vo.ArtistCollection
+import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Path
@@ -33,7 +34,14 @@ interface MusicBrainzApi {
      */
     @Headers(ACCEPT_JSON)
     @GET("collection/{mbid}/artists")
-    fun getMyCollection(@Path("mbid") id: String): Deferred<List<Artist>>
+    fun getArtistCollection(@Path("mbid") id: String): Deferred<ArtistCollection>
 
+    /**
+     * Get releases of an Artist by mbid
+     * @return releases wrapper which contains the first page of releases
+     */
+    @Headers(ACCEPT_JSON)
+    @GET("release")
+    fun getReleases(@Query("artist") artist: String): Deferred<ReleasesResponse>
 
 }
