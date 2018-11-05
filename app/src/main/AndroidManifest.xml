@@ -13,7 +13,8 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name="com.github.ggaier.gongs.MainActivity">
+        <activity android:name="com.github.ggaier.gongs.ui.mycollection.MainActivity"
+            android:hardwareAccelerated="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

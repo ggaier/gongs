@@ -1,4 +1,4 @@
-package com.github.ggaier.gongs
+package com.github.ggaier.gongs.ui.mycollection
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -14,7 +14,13 @@ import com.github.ggaier.gongs.vo.Artist
 class SingersAdapter : ListAdapter<Artist, SingersAdapter.ViewHolder>(SingerDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-            ViewHolder(ListItemSingerBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        ViewHolder(
+            ListItemSingerBinding.inflate(
+                LayoutInflater.from(
+                    parent.context
+                ), parent, false
+            )
+        )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))

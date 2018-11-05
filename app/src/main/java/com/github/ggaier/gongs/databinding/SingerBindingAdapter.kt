@@ -1,4 +1,4 @@
-package com.github.ggaier.gongs
+package com.github.ggaier.gongs.databinding
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
