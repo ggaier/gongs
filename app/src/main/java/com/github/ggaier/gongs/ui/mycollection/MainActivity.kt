@@ -2,14 +2,17 @@ package com.github.ggaier.gongs.ui.mycollection
 
 import android.graphics.drawable.ShapeDrawable
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.github.ggaier.gongs.BaseActivity
 import com.github.ggaier.gongs.R
 import com.github.ggaier.gongs.databinding.ActivityMainBinding
+import com.github.ggaier.gongs.util.obtainViewModel
 import org.jetbrains.anko.dip
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
+
+    private lateinit var model: MyCollectionViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +26,8 @@ class MainActivity : AppCompatActivity() {
             it.setDrawable(shapeDrawable)
         })
         binding.singers.adapter = SingersAdapter()
+        model = obtainViewModel(MyCollectionViewModel::class.java)
+        model.getCollection()
     }
 
 }
