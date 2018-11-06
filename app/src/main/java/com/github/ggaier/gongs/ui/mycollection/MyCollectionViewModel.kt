@@ -26,7 +26,7 @@ class MyCollectionViewModel(private val context: Application, private val repo: 
         if(!::collectionMbid.isInitialized){
             collectionMbid = MutableLiveData()
         }
-        repo.getMyArtistCollection("31c35274-ffb8-4280-86e2-caede042e474 ").artists
+        repo.getMyArtistCollection("31c35274-ffb8-4280-86e2-caede042e474").artists
     }
 
     override fun onCleared() {
