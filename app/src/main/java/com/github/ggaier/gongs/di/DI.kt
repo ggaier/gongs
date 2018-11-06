@@ -21,7 +21,7 @@ object DI {
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .addConverterFactory(GsonConverterFactory.create())
             .client(OkHttpClient.Builder().addInterceptor(HttpLoggingInterceptor().also {
-                it.level = HttpLoggingInterceptor.Level.BASIC
+                it.level = HttpLoggingInterceptor.Level.BODY
             }).build())
             .build()
             .create(MusicBrainzApi::class.java)
