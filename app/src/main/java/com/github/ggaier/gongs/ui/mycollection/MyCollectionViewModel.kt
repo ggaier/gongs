@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import com.github.ggaier.gongs.data.CollectionRepository
 import com.github.ggaier.gongs.util.launchSilent
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlin.coroutines.CoroutineContext
 
 /**
@@ -14,8 +16,9 @@ import kotlin.coroutines.CoroutineContext
 class MyCollectionViewModel(private val context: Application, private val repo: CollectionRepository) :
     ViewModel(), CoroutineScope{
 
+    private val job: Job = Job()
     override val coroutineContext: CoroutineContext
-        get() = TODO("not implemented")
+        get() = job + Dispatchers.Main
 
     private lateinit var collectionMbid: MutableLiveData<String>
 
@@ -24,6 +27,11 @@ class MyCollectionViewModel(private val context: Application, private val repo: 
             collectionMbid = MutableLiveData()
         }
         repo.getMyArtistCollection("31c35274-ffb8-4280-86e2-caede042e474 ").artists
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        job.cancel()
     }
 
 }
