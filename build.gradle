@@ -18,6 +18,7 @@ buildscript {
         work_version = "1.0.0-alpha10"
         retrofit_version = "2.4.0"
         retrofit_coroutines_version = "0.9.2"
+        okhttp_logging_version = "3.11.0"
     }
     repositories {
         google()
