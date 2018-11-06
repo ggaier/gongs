@@ -4,7 +4,7 @@ import com.github.ggaier.gongs.api.MusicBrainzApi
 import com.github.ggaier.gongs.data.CollectionRepository
 import com.github.ggaier.gongs.data.local.CollectionLocalSource
 import com.github.ggaier.gongs.data.remote.CollectionRemoteSource
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import retrofit2.Retrofit
 
 /**
