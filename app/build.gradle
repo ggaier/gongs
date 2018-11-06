@@ -21,7 +21,13 @@ android {
     }
 
     buildTypes {
+        debug{
+            buildConfigField("String", "USER_NAME", "\"$MUSIC_BRAINZ_USER_NAME\"")
+            buildConfigField("String", "PASSWORD", "\"$MUSIC_BRAINZ_PASSWORD\"")
+        }
         release {
+            buildConfigField("String", "USER_NAME", "\"\"")
+            buildConfigField("String", "PASSWORD", "\"\"")
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -57,6 +63,7 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$retrofit_coroutines_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_logging_version"
+    implementation "com.burgstaller:okhttp-digest:$okhttp_digest_version"
 
 
     testImplementation 'junit:junit:4.12'
