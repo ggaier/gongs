@@ -1,5 +1,6 @@
 package com.github.ggaier.gongs.ui.mycollection
 
+import android.graphics.Color
 import android.graphics.drawable.ShapeDrawable
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -28,6 +29,7 @@ class MainActivity : BaseActivity() {
             DividerItemDecoration.VERTICAL
         ).also {
             val shapeDrawable = ShapeDrawable()
+            shapeDrawable.paint.color = Color.TRANSPARENT
             shapeDrawable.intrinsicHeight = dip(8)
             it.setDrawable(shapeDrawable)
         })

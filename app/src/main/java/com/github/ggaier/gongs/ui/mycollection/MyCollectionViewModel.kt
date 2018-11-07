@@ -10,6 +10,7 @@ import com.github.ggaier.gongs.vo.Artist
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import timber.log.Timber
 import kotlin.coroutines.CoroutineContext
 
 /**
@@ -18,7 +19,6 @@ import kotlin.coroutines.CoroutineContext
 class MyCollectionViewModel(private val context: Application, private val repo: CollectionRepository) :
     ViewModel(), CoroutineScope {
 
-    private val TAG = "Gongs"
 
     private val job: Job = Job()
     override val coroutineContext: CoroutineContext
@@ -28,11 +28,14 @@ class MyCollectionViewModel(private val context: Application, private val repo: 
     val loading = ObservableBoolean(false)
 
     fun getCollection(mbid: String) = launchSilent {
+        Timber.d("Thread1: ${Thread.currentThread().name}")
         loading.set(true)
         repo.getMyArtistCollection(mbid).artists.run {
             artists.addAll(this)
+            Timber.d("Thread3: ${Thread.currentThread().name}")
         }
         loading.set(false)
+        Timber.d("Thread2: ${Thread.currentThread().name}")
     }
 
     override fun onCleared() {

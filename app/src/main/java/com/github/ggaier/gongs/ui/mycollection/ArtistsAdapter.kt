@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.github.ggaier.gongs.databinding.ListItemArtistBinding
 import com.github.ggaier.gongs.vo.Artist
+import timber.log.Timber
 
 /**
  * Created by wenbo, 2018/10/12
@@ -23,6 +24,7 @@ class ArtistsAdapter : ListAdapter<Artist, ArtistsAdapter.ViewHolder>(SingerDiff
         )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        Timber.d("onBindViewHolder: $position, ${getItem(position)}")
         holder.bind(getItem(position))
     }
 
