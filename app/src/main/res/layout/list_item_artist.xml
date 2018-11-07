@@ -25,6 +25,8 @@
             android:paddingLeft="@dimen/spacing_large"
             android:paddingRight="@dimen/spacing_large"
             android:text="@{singer.name}"
+            android:textColor="@color/black_primary"
+            android:textSize="18sp"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

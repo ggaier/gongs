@@ -1,9 +1,8 @@
 package com.github.ggaier.gongs.ui.mycollection
 
 import android.app.Application
-import android.util.Log
 import androidx.databinding.ObservableArrayList
-import androidx.lifecycle.MutableLiveData
+import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.ViewModel
 import com.github.ggaier.gongs.data.CollectionRepository
 import com.github.ggaier.gongs.util.launchSilent
@@ -26,17 +25,14 @@ class MyCollectionViewModel(private val context: Application, private val repo: 
         get() = job + Dispatchers.Main
 
     val artists = ObservableArrayList<Artist>()
+    val loading = ObservableBoolean(false)
 
-    private lateinit var collectionMbid: MutableLiveData<String>
-
-    fun getCollection() = launchSilent {
-        if (!::collectionMbid.isInitialized) {
-            collectionMbid = MutableLiveData()
-        }
-        repo.getMyArtistCollection("31c35274-ffb8-4280-86e2-caede042e474").artists.run {
-            Log.d(TAG, "result: $this")
+    fun getCollection(mbid: String) = launchSilent {
+        loading.set(true)
+        repo.getMyArtistCollection(mbid).artists.run {
             artists.addAll(this)
         }
+        loading.set(false)
     }
 
     override fun onCleared() {

@@ -24,10 +24,12 @@ android {
         debug{
             buildConfigField("String", "USER_NAME", "\"$MUSIC_BRAINZ_USER_NAME\"")
             buildConfigField("String", "PASSWORD", "\"$MUSIC_BRAINZ_PASSWORD\"")
+            buildConfigField("String", "COLLECTION_ID", "\"$MUSIC_BRAINZ_COLLECTION_ID\"")
         }
         release {
             buildConfigField("String", "USER_NAME", "\"\"")
             buildConfigField("String", "PASSWORD", "\"\"")
+            buildConfigField("String", "COLLECTION_ID", "\"\"")
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

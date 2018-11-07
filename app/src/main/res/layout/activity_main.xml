@@ -4,7 +4,9 @@
         xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="activity"
+            type="com.github.ggaier.gongs.ui.mycollection.MainActivity"/>
         <variable
             name="viewModel"
             type="com.github.ggaier.gongs.ui.mycollection.MyCollectionViewModel"/>
@@ -14,13 +16,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/singers"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/refresh_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone"
-            app:items="@{viewModel.artists}"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            android:layout_height="wrap_content"
+            app:refreshing="@{viewModel.loading}"
+            app:onRefreshListener="@{activity.refreshListener}">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/singers"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                app:items="@{viewModel.artists}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

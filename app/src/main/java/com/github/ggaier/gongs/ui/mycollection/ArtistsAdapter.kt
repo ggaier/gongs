@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.github.ggaier.gongs.databinding.ListItemSingerBinding
+import com.github.ggaier.gongs.databinding.ListItemArtistBinding
 import com.github.ggaier.gongs.vo.Artist
 
 /**
@@ -15,7 +15,7 @@ class ArtistsAdapter : ListAdapter<Artist, ArtistsAdapter.ViewHolder>(SingerDiff
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
-            ListItemSingerBinding.inflate(
+            ListItemArtistBinding.inflate(
                 LayoutInflater.from(
                     parent.context
                 ), parent, false
@@ -26,14 +26,13 @@ class ArtistsAdapter : ListAdapter<Artist, ArtistsAdapter.ViewHolder>(SingerDiff
         holder.bind(getItem(position))
     }
 
-    class ViewHolder(private val binding: ListItemSingerBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: ListItemArtistBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Artist) {
             binding.singer = item
             if (binding.albums.adapter == null) {
                 binding.albums.adapter = AlbumsAdapter()
             }
-//            (binding.albums.adapter as AlbumsAdapter).submitList(item.)
         }
 
     }
@@ -42,7 +41,7 @@ class ArtistsAdapter : ListAdapter<Artist, ArtistsAdapter.ViewHolder>(SingerDiff
 
         override fun areItemsTheSame(oldItem: Artist, newItem: Artist): Boolean = oldItem.name == newItem.name
 
-        override fun areContentsTheSame(oldItem: Artist, newItem: Artist): Boolean = false
-//                oldItem.name == newItem.name && oldItem.albums.size == newItem.albums.size
+        override fun areContentsTheSame(oldItem: Artist, newItem: Artist): Boolean =
+            oldItem.id == newItem.id
     }
 }
