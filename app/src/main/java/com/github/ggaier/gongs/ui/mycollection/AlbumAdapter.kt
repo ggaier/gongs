@@ -11,7 +11,7 @@ import com.github.ggaier.gongs.vo.Album
 /**
  * Created by wenbo, 2018/10/12
  */
-class AlbumsAdapter : ListAdapter<Album, AlbumsAdapter.ViewHolder>(AlbumDiffCallback()) {
+class AlbumAdapter : ListAdapter<Album, AlbumAdapter.ViewHolder>(AlbumDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             ListItemAlbumBinding.inflate(

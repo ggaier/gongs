@@ -2,21 +2,23 @@ package com.github.ggaier.gongs.ui.mycollection
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.github.ggaier.gongs.databinding.ListItemArtistBinding
+import com.github.ggaier.gongs.databinding.ListItemArtistCollectionBinding
+import com.github.ggaier.gongs.util.obtainViewModel
 import com.github.ggaier.gongs.vo.Artist
 import timber.log.Timber
 
 /**
  * Created by wenbo, 2018/10/12
  */
-class ArtistsAdapter : ListAdapter<Artist, ArtistsAdapter.ViewHolder>(SingerDiffCallback()) {
+class ArtistAdapter : ListAdapter<Artist, ArtistAdapter.ViewHolder>(SingerDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
-            ListItemArtistBinding.inflate(
+            ListItemArtistCollectionBinding.inflate(
                 LayoutInflater.from(
                     parent.context
                 ), parent, false
@@ -28,13 +30,18 @@ class ArtistsAdapter : ListAdapter<Artist, ArtistsAdapter.ViewHolder>(SingerDiff
         holder.bind(getItem(position))
     }
 
-    class ViewHolder(private val binding: ListItemArtistBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: ListItemArtistCollectionBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Artist) {
             binding.singer = item
-            if (binding.albums.adapter == null) {
-                binding.albums.adapter = AlbumsAdapter()
+            val viewModel = (binding.root.context as AppCompatActivity).obtainViewModel(ArtistViewModel::class.java)
+            if (binding.viewModel == null) {
+                binding.viewModel = viewModel
             }
+            if (binding.albums.adapter == null) {
+                binding.albums.adapter = AlbumAdapter()
+            }
+            viewModel.getReleases(item.id)
         }
 
     }

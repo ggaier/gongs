@@ -21,6 +21,7 @@ import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.github.ggaier.gongs.di.DI
+import com.github.ggaier.gongs.ui.mycollection.ArtistViewModel
 import com.github.ggaier.gongs.ui.mycollection.MyCollectionViewModel
 
 /**
@@ -39,6 +40,8 @@ class ViewModelFactory private constructor(
                 when {
                     isAssignableFrom(MyCollectionViewModel::class.java) ->
                         MyCollectionViewModel(application, DI.collectionRepository)
+                    isAssignableFrom(ArtistViewModel::class.java) ->
+                        ArtistViewModel(DI.collectionRepository)
                     else ->
                         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
                 }

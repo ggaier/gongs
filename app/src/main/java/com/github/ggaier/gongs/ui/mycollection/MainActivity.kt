@@ -33,7 +33,7 @@ class MainActivity : BaseActivity() {
             shapeDrawable.intrinsicHeight = dip(8)
             it.setDrawable(shapeDrawable)
         })
-        binding.singers.adapter = ArtistsAdapter()
+        binding.singers.adapter = ArtistAdapter()
         model.getCollection(BuildConfig.COLLECTION_ID)
     }
 
