@@ -16,18 +16,20 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding: ActivityMainBinding = DataBindingUtil.setContentView(this,
-            R.layout.activity_main
-        )
-        binding.singers.addItemDecoration(DividerItemDecoration(this@MainActivity,
-                DividerItemDecoration.VERTICAL).also {
+        model = obtainViewModel(MyCollectionViewModel::class.java)
+        val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.viewModel = model
+        binding.singers.addItemDecoration(DividerItemDecoration(
+            this@MainActivity,
+            DividerItemDecoration.VERTICAL
+        ).also {
             val shapeDrawable = ShapeDrawable()
             shapeDrawable.intrinsicHeight = dip(8)
             it.setDrawable(shapeDrawable)
         })
         binding.singers.adapter = ArtistsAdapter()
-        model = obtainViewModel(MyCollectionViewModel::class.java)
         model.getCollection()
     }
+
 
 }
