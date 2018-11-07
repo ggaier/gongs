@@ -11,7 +11,7 @@ import com.github.ggaier.gongs.vo.Artist
 /**
  * Created by wenbo, 2018/10/12
  */
-class SingersAdapter : ListAdapter<Artist, SingersAdapter.ViewHolder>(SingerDiffCallback()) {
+class ArtistsAdapter : ListAdapter<Artist, ArtistsAdapter.ViewHolder>(SingerDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(

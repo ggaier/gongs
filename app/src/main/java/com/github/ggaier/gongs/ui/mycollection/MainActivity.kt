@@ -25,7 +25,7 @@ class MainActivity : BaseActivity() {
             shapeDrawable.intrinsicHeight = dip(8)
             it.setDrawable(shapeDrawable)
         })
-        binding.singers.adapter = SingersAdapter()
+        binding.singers.adapter = ArtistsAdapter()
         model = obtainViewModel(MyCollectionViewModel::class.java)
         model.getCollection()
     }
