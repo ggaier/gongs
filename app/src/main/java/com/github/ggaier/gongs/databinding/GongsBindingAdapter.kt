@@ -22,7 +22,7 @@ fun imageFromUrl(view: ImageView, mbid: String?) {
         GlideApp.with(view)
             .load("http://coverartarchive.org/release/$mbid/front")
             .error(R.drawable.ic_placeholder_image)
-            .transform(RoundedCornersTransformation(view.context.dip(4), 0))
+            .transform(RoundedCornersTransformation(view.context.dip(8), 0))
             .into(view)
     }
 }
