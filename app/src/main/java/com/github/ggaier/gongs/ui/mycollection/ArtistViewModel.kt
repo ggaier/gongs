@@ -10,7 +10,6 @@ import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import timber.log.Timber
 import kotlin.coroutines.CoroutineContext
 
 /**
@@ -27,10 +26,9 @@ class ArtistViewModel(private val repo: CollectionRepository) : ViewModel(), Cor
     val showError = ObservableBoolean()
 
 
-    fun getReleases(mbid: String, showUI: Boolean) = launchSilent {
-        Timber.d("reference: ${this@ArtistViewModel}")
-        loading[mbid] = true
-        if (showUI) {
+    fun loadReleases(mbid: String, refresh: Boolean) = launchSilent {
+        if (refresh) {
+            loading[mbid] = true
             showError.set(false)
         }
         try {
@@ -38,10 +36,12 @@ class ArtistViewModel(private val repo: CollectionRepository) : ViewModel(), Cor
         } catch (e: Exception) {
             e.printStackTrace()
             if (e !is CancellationException) {
-                showError.set(true)
+                if (refresh) {
+                    showError.set(true)
+                }
             }
         }
-        if (showUI) {
+        if (refresh) {
             loading[mbid] = false
         }
     }

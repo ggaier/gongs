@@ -57,7 +57,7 @@ class ArtistAdapter : ListAdapter<Artist, ArtistAdapter.ViewHolder>(SingerDiffCa
                 binding.albums.adapter = AlbumAdapter()
                 showUI = true
             }
-            viewModel.getReleases(item.id, showUI)
+            viewModel.loadReleases(item.id, showUI)
         }
 
     }

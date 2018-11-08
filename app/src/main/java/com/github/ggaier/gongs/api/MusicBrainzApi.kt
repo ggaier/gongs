@@ -42,6 +42,10 @@ interface MusicBrainzApi {
      */
     @Headers(ACCEPT_JSON)
     @GET("release")
-    fun getReleases(@Query("artist") artist: String): Deferred<ReleasesResponse>
+    fun getReleases(
+        @Query("artist") artist: String
+//        @Query("type") type: String = "album"
+//        @Query("status") status: String = "official"
+    ): Deferred<ReleasesResponse>
 
 }

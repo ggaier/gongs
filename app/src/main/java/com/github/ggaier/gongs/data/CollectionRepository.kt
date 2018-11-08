@@ -17,7 +17,9 @@ class CollectionRepository(
         return if (cache[mbid] != null) {
             cache[mbid]
         } else {
-            remoteSource.getMyArtistCollection(mbid)
+            remoteSource.getMyArtistCollection(mbid).also {
+                cache.put(mbid, it)
+            }
         }
     }
 

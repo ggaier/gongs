@@ -13,4 +13,7 @@ open class ApiResponse(
     val count: Int = 0
 )
 
-data class ReleasesResponse(val releases: List<Album>): ApiResponse()
+data class ReleasesResponse(
+    @SerializedName("releases", alternate = ["release-groups"])
+    val releases: List<Album>
+) : ApiResponse()

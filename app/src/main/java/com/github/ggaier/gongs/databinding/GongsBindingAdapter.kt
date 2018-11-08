@@ -3,6 +3,7 @@ package com.github.ggaier.gongs.databinding
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.github.ggaier.gongs.R
 import com.github.ggaier.gongs.ui.mycollection.AlbumAdapter
 import com.github.ggaier.gongs.ui.mycollection.ArtistAdapter
@@ -21,6 +22,7 @@ fun imageFromUrl(view: ImageView, mbid: String?) {
     if (!mbid.isNullOrEmpty()) {
         GlideApp.with(view)
             .load("http://coverartarchive.org/release/$mbid/front")
+            .transition(DrawableTransitionOptions.withCrossFade())
             .error(R.drawable.ic_placeholder_image)
             .transform(RoundedCornersTransformation(view.context.dip(8), 0))
             .into(view)
