@@ -3,10 +3,11 @@ package com.github.ggaier.gongs.databinding
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.github.ggaier.gongs.R
 import com.github.ggaier.gongs.ui.mycollection.AlbumAdapter
 import com.github.ggaier.gongs.ui.mycollection.ArtistAdapter
+import com.github.ggaier.gongs.util.GlideApp
 import com.github.ggaier.gongs.vo.Album
 import com.github.ggaier.gongs.vo.Artist
 import timber.log.Timber
@@ -17,7 +18,9 @@ import timber.log.Timber
 @BindingAdapter("imageUrl")
 fun imageFromUrl(view: ImageView, mbid: String?) {
     if (!mbid.isNullOrEmpty()) {
-        Glide.with(view).load("http://coverartarchive.org/release/$mbid/front")
+        GlideApp.with(view)
+            .load("http://coverartarchive.org/release/$mbid/front")
+            .error(R.drawable.ic_placeholder_image)
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(view)
     }
