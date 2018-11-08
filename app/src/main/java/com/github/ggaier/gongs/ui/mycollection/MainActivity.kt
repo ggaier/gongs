@@ -1,7 +1,5 @@
 package com.github.ggaier.gongs.ui.mycollection
 
-import android.graphics.Color
-import android.graphics.drawable.ShapeDrawable
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -11,7 +9,6 @@ import com.github.ggaier.gongs.BuildConfig
 import com.github.ggaier.gongs.R
 import com.github.ggaier.gongs.databinding.ActivityMainBinding
 import com.github.ggaier.gongs.util.obtainViewModel
-import org.jetbrains.anko.dip
 
 class MainActivity : BaseActivity() {
 
@@ -24,15 +21,12 @@ class MainActivity : BaseActivity() {
         val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.viewModel = model
         binding.activity = this
-        binding.singers.addItemDecoration(DividerItemDecoration(
-            this@MainActivity,
-            DividerItemDecoration.VERTICAL
-        ).also {
-            val shapeDrawable = ShapeDrawable()
-            shapeDrawable.paint.color = Color.TRANSPARENT
-            shapeDrawable.intrinsicHeight = dip(8)
-            it.setDrawable(shapeDrawable)
-        })
+        binding.singers.addItemDecoration(
+            DividerItemDecoration(
+                this@MainActivity,
+                DividerItemDecoration.VERTICAL
+            )
+        )
         binding.singers.adapter = ArtistAdapter()
         model.getCollection(BuildConfig.COLLECTION_ID)
     }

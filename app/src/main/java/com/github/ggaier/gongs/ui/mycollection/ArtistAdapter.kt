@@ -1,14 +1,18 @@
 package com.github.ggaier.gongs.ui.mycollection
 
+import android.graphics.Color
+import android.graphics.drawable.ShapeDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.github.ggaier.gongs.databinding.ListItemArtistCollectionBinding
 import com.github.ggaier.gongs.util.obtainViewModel
 import com.github.ggaier.gongs.vo.Artist
+import org.jetbrains.anko.dip
 import timber.log.Timber
 
 /**
@@ -38,10 +42,20 @@ class ArtistAdapter : ListAdapter<Artist, ArtistAdapter.ViewHolder>(SingerDiffCa
             if (binding.viewModel == null) {
                 binding.viewModel = viewModel
             }
+            val context = binding.root.context
             if (binding.albums.adapter == null) {
+                binding.albums.addItemDecoration(DividerItemDecoration(
+                    context,
+                    DividerItemDecoration.HORIZONTAL
+                ).also {
+                    val shapeDrawable = ShapeDrawable()
+                    shapeDrawable.paint.color = Color.TRANSPARENT
+                    shapeDrawable.intrinsicWidth = context.dip(16)
+                    it.setDrawable(shapeDrawable)
+                })
                 binding.albums.adapter = AlbumAdapter()
+                viewModel.getReleases(item.id)
             }
-            viewModel.getReleases(item.id)
         }
 
     }

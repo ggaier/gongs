@@ -15,9 +15,9 @@ import timber.log.Timber
  * Created by wenbo, 2018/10/12
  */
 @BindingAdapter("imageUrl")
-fun imageFromUrl(view: ImageView, url: String?) {
-    if (!url.isNullOrEmpty()) {
-        Glide.with(view).load(url)
+fun imageFromUrl(view: ImageView, mbid: String?) {
+    if (!mbid.isNullOrEmpty()) {
+        Glide.with(view).load("http://coverartarchive.org/release/$mbid/front")
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(view)
     }
@@ -38,9 +38,9 @@ fun setItems(listView: RecyclerView, items: List<Artist>) {
 }
 
 @BindingAdapter("app:releases")
-fun setReleases(listView: RecyclerView, items: List<Album>){
-    with(listView.adapter as AlbumAdapter){
-        if(items.isNotEmpty()){
+fun setReleases(listView: RecyclerView, items: List<Album>?) {
+    with(listView.adapter as AlbumAdapter) {
+        if (!items.isNullOrEmpty()) {
             Timber.d("releases: ${items.size}")
             submitList(items)
         }

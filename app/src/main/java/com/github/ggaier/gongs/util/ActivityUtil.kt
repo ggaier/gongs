@@ -11,3 +11,4 @@ import com.example.android.architecture.blueprints.todoapp.ViewModelFactory
 
 fun <T : ViewModel> AppCompatActivity.obtainViewModel(viewModelClass: Class<T>) =
     ViewModelProviders.of(this, ViewModelFactory.getInstance(application)).get(viewModelClass)
+

@@ -27,7 +27,8 @@
             android:id="@+id/name"
             style="@style/TextAppearance.AppCompat.Title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
             android:maxLines="2"
             android:paddingLeft="@dimen/spacing_large"
             android:paddingRight="@dimen/spacing_large"
@@ -45,7 +46,6 @@
             android:id="@+id/albums"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_normal"
             android:clipToPadding="false"
             android:orientation="horizontal"
             android:paddingLeft="@dimen/spacing_large"
@@ -54,14 +54,18 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/name"
-            app:releases="@{viewModel.albums}"/>
+            app:releases="@{viewModel.albums[singer.id]}"/>
 
         <ProgressBar
             android:id="@+id/progress"
             style="@style/Widget.AppCompat.ProgressBar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="@{viewModel.loading?View.VISIBLE:View.GONE}"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.loading[singer.id]?View.VISIBLE:View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

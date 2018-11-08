@@ -16,32 +16,34 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="@{clickListener}">
+        android:layout_height="match_parent"
+        android:background="?selectableItemBackground"
+        android:onClick="@{clickListener}"
+        android:paddingBottom="@dimen/spacing_normal">
 
         <ImageView
             android:id="@+id/album_cover"
-            android:layout_width="108dp"
-            android:layout_height="0dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:scaleType="centerCrop"
             app:imageUrl="@{album.id}"
-            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />
 
         <TextView
             android:id="@+id/name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_normal"
             android:ellipsize="end"
             android:maxLines="3"
             android:text="@{album.title}"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintLeft_toLeftOf="@id/album_cover"
+            app:layout_constraintRight_toRightOf="@id/album_cover"
             app:layout_constraintTop_toBottomOf="@id/album_cover"
-            tools:text="Rainbow"/>
+            tools:text="Rainbow, Rainbow, Rainbow"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
