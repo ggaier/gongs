@@ -6,10 +6,11 @@ import com.github.ggaier.gongs.vo.ArtistCollection
 /**
  * Created by wenbo, 2018/11/5
  */
-interface CollectionSource{
+interface CollectionSource {
 
-    suspend fun getMyArtistCollection(mbid: String):ArtistCollection
+    @Throws(Exception::class)
+    suspend fun getMyArtistCollection(mbid: String): ArtistCollection
 
-    suspend fun getReleasesByArtist(mbid: String):ReleasesResponse
+    suspend fun getReleasesByArtist(mbid: String): ReleasesResponse
 
 }

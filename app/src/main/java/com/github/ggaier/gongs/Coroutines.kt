@@ -27,10 +27,21 @@ val counterContext = newSingleThreadContext("counterContext")
 var counter = 0
 
 fun main(args: Array<String>) = runBlocking<Unit> {
-    //sampleStart
-    CoroutineScope(counterContext).massiveRun {
-        counter++
+    //    //sampleStart
+    //    CoroutineScope(counterContext).massiveRun {
+    //        counter++
+    //    }
+    //    println("Counter = ${counter}")
+
+    val list = mutableListOf<String>()
+    list.add("-1")
+    list.add("0")
+    while (list.iterator().hasNext() && list.size < 10) {
+        list.add(list.size.toString())
     }
-    println("Counter = ${counter}")
+    while (list.iterator().hasNext()){
+        list.iterator().next()
+    }
+    System.out.print("result: $list")
     //sampleEnd
 }

@@ -3,13 +3,14 @@ package com.github.ggaier.gongs.databinding
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.github.ggaier.gongs.R
 import com.github.ggaier.gongs.ui.mycollection.AlbumAdapter
 import com.github.ggaier.gongs.ui.mycollection.ArtistAdapter
 import com.github.ggaier.gongs.util.GlideApp
 import com.github.ggaier.gongs.vo.Album
 import com.github.ggaier.gongs.vo.Artist
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation
+import org.jetbrains.anko.dip
 import timber.log.Timber
 
 /**
@@ -21,7 +22,7 @@ fun imageFromUrl(view: ImageView, mbid: String?) {
         GlideApp.with(view)
             .load("http://coverartarchive.org/release/$mbid/front")
             .error(R.drawable.ic_placeholder_image)
-            .transition(DrawableTransitionOptions.withCrossFade())
+            .transform(RoundedCornersTransformation(view.context.dip(4), 0))
             .into(view)
     }
 }

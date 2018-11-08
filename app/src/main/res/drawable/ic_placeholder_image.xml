@@ -4,11 +4,15 @@
     <item>
         <shape>
             <solid android:color="@color/colorPrimaryLight"/>
+            <corners android:radius="4dp"/>
         </shape>
     </item>
 
-    <item android:drawable="@drawable/ic_broken_image_white_48dp">
-
+    <item
+        android:bottom="@dimen/spacing_normal"
+        android:drawable="@drawable/ic_broken_image_white_48dp"
+        android:left="@dimen/spacing_normal"
+        android:right="@dimen/spacing_normal"
+        android:top="@dimen/spacing_normal">
     </item>
-
-</>
+</layer-list>

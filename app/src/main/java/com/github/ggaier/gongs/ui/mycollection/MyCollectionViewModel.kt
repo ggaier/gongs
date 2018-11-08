@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.github.ggaier.gongs.data.CollectionRepository
 import com.github.ggaier.gongs.util.launchSilent
 import com.github.ggaier.gongs.vo.Artist
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -30,9 +31,16 @@ class MyCollectionViewModel(private val context: Application, private val repo: 
     fun getCollection(mbid: String) = launchSilent {
         Timber.d("Thread1: ${Thread.currentThread().name}")
         loading.set(true)
-        repo.getMyArtistCollection(mbid).artists.run {
-            artists.addAll(this)
-            Timber.d("Thread3: ${Thread.currentThread().name}")
+        try {
+            repo.getMyArtistCollection(mbid).artists.run {
+                artists.addAll(this)
+                Timber.d("Thread3: ${Thread.currentThread().name}")
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            if (e !is CancellationException) {
+
+            }
         }
         loading.set(false)
         Timber.d("Thread2: ${Thread.currentThread().name}")

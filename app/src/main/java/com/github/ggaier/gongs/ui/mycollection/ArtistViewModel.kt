@@ -1,10 +1,12 @@
 package com.github.ggaier.gongs.ui.mycollection
 
 import androidx.databinding.ObservableArrayMap
+import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.ViewModel
 import com.github.ggaier.gongs.data.CollectionRepository
 import com.github.ggaier.gongs.util.launchSilent
 import com.github.ggaier.gongs.vo.Album
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -22,11 +24,20 @@ class ArtistViewModel(private val repo: CollectionRepository) : ViewModel(), Cor
 
     val albums = ObservableArrayMap<String, List<Album>>()
     val loading = ObservableArrayMap<String, Boolean>()
+    val showError = ObservableBoolean()
 
     fun getReleases(mbid: String) = launchSilent {
         Timber.d("reference: ${this@ArtistViewModel}")
         loading[mbid] = true
-        albums[mbid] = repo.getReleasesByArtist(mbid).releases
+        showError.set(false)
+        try {
+            albums[mbid] = repo.getReleasesByArtist(mbid).releases
+        } catch (e: Exception) {
+            e.printStackTrace()
+            if (e !is CancellationException) {
+                showError.set(true)
+            }
+        }
         loading[mbid] = false
     }
 

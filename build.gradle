@@ -22,6 +22,8 @@ buildscript {
         okhttp_digest_version = "1.18"
         anko_version = "0.10.7"
         timber_version = "4.7.1"
+        roundedimageview_version = "2.3.0"
+        glide_transformations_version = "3.3.0"
     }
     repositories {
         google()
