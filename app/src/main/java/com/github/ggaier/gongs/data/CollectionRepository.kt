@@ -1,6 +1,7 @@
 package com.github.ggaier.gongs.data
 
 import android.util.LruCache
+import com.github.ggaier.gongs.api.ReleasesResponse
 import com.github.ggaier.gongs.vo.ArtistCollection
 
 /**
@@ -12,6 +13,17 @@ class CollectionRepository(
 ) : CollectionSource by remoteSource {
 
     private val cache: LruCache<String, ArtistCollection> = LruCache(50)
+    private val releasesCache = LruCache<String, ReleasesResponse>(50)
+
+    override suspend fun getReleasesByArtist(mbid: String): ReleasesResponse {
+        return if(releasesCache[mbid]!=null){
+            releasesCache[mbid]
+        }else{
+            remoteSource.getReleasesByArtist(mbid).also {
+                releasesCache.put(mbid, it)
+            }
+        }
+    }
 
     override suspend fun getMyArtistCollection(mbid: String): ArtistCollection {
         return if (cache[mbid] != null) {

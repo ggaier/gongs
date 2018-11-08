@@ -20,6 +20,8 @@ import timber.log.Timber
  */
 class ArtistAdapter : ListAdapter<Artist, ArtistAdapter.ViewHolder>(SingerDiffCallback()) {
 
+    private val recyclerViewPool = RecyclerView.RecycledViewPool()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
             ListItemArtistCollectionBinding.inflate(
@@ -29,12 +31,17 @@ class ArtistAdapter : ListAdapter<Artist, ArtistAdapter.ViewHolder>(SingerDiffCa
             )
         )
 
+    override fun onBindViewHolder(holder: ViewHolder, position: Int, payloads: MutableList<Any>) {
+        super.onBindViewHolder(holder, position, payloads)
+        Timber.d("onBindViewHolder with payloads: $payloads")
+    }
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         Timber.d("onBindViewHolder: $position, ${getItem(position)}")
         holder.bind(getItem(position))
     }
 
-    class ViewHolder(private val binding: ListItemArtistCollectionBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: ListItemArtistCollectionBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Artist) {
             binding.singer = item
@@ -45,6 +52,7 @@ class ArtistAdapter : ListAdapter<Artist, ArtistAdapter.ViewHolder>(SingerDiffCa
             val context = binding.root.context
             var showUI = false
             if (binding.albums.adapter == null) {
+                binding.albums.setRecycledViewPool(recyclerViewPool)
                 binding.albums.addItemDecoration(DividerItemDecoration(
                     context,
                     DividerItemDecoration.HORIZONTAL

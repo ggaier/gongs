@@ -37,13 +37,11 @@ class AlbumAdapter : ListAdapter<Album, AlbumAdapter.ViewHolder>(AlbumDiffCallba
 
     private class AlbumDiffCallback : DiffUtil.ItemCallback<Album>() {
         override fun areItemsTheSame(oldItem: Album, newItem: Album): Boolean {
-            //            return oldItem.name == newItem.name
-            return false
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: Album, newItem: Album): Boolean {
-            //            return oldItem.cover == newItem.cover && oldItem.rating == newItem.rating
-            return false
+            return oldItem.id == newItem.id
         }
     }
 }

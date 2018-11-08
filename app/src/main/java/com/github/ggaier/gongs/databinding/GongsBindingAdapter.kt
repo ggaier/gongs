@@ -45,10 +45,10 @@ fun setItems(listView: RecyclerView, items: List<Artist>) {
 
 @BindingAdapter("app:releases")
 fun setReleases(listView: RecyclerView, items: List<Album>?) {
-    with(listView.adapter as AlbumAdapter) {
+    with(listView.adapter as AlbumAdapter?) {
         if (!items.isNullOrEmpty()) {
             Timber.d("releases: ${items.size}")
-            submitList(items)
+            this?.submitList(items)
         }
     }
 }
