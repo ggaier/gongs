@@ -33,8 +33,9 @@ class MyCollectionViewModel(private val context: Application, private val repo: 
         loading.set(true)
         try {
             repo.getMyArtistCollection(mbid).artists.run {
-                artists.addAll(this)
                 Timber.d("Thread3: ${Thread.currentThread().name}")
+                artists.clear()
+                artists.addAll(this)
             }
         } catch (e: Exception) {
             e.printStackTrace()

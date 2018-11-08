@@ -26,10 +26,13 @@ class ArtistViewModel(private val repo: CollectionRepository) : ViewModel(), Cor
     val loading = ObservableArrayMap<String, Boolean>()
     val showError = ObservableBoolean()
 
-    fun getReleases(mbid: String) = launchSilent {
+
+    fun getReleases(mbid: String, showUI: Boolean) = launchSilent {
         Timber.d("reference: ${this@ArtistViewModel}")
         loading[mbid] = true
-        showError.set(false)
+        if (showUI) {
+            showError.set(false)
+        }
         try {
             albums[mbid] = repo.getReleasesByArtist(mbid).releases
         } catch (e: Exception) {
@@ -38,7 +41,9 @@ class ArtistViewModel(private val repo: CollectionRepository) : ViewModel(), Cor
                 showError.set(true)
             }
         }
-        loading[mbid] = false
+        if (showUI) {
+            loading[mbid] = false
+        }
     }
 
 

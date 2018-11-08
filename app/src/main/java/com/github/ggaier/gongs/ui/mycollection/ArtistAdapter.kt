@@ -43,6 +43,7 @@ class ArtistAdapter : ListAdapter<Artist, ArtistAdapter.ViewHolder>(SingerDiffCa
                 binding.viewModel = viewModel
             }
             val context = binding.root.context
+            var showUI = false
             if (binding.albums.adapter == null) {
                 binding.albums.addItemDecoration(DividerItemDecoration(
                     context,
@@ -54,8 +55,9 @@ class ArtistAdapter : ListAdapter<Artist, ArtistAdapter.ViewHolder>(SingerDiffCa
                     it.setDrawable(shapeDrawable)
                 })
                 binding.albums.adapter = AlbumAdapter()
-                viewModel.getReleases(item.id)
+                showUI = true
             }
+            viewModel.getReleases(item.id, showUI)
         }
 
     }
