@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.github.ggaier.gongs.databinding.ListItemAlbumBinding
 import com.github.ggaier.gongs.vo.Album
-import timber.log.Timber
 
 /**
  * Created by wenbo, 2018/10/12
@@ -23,12 +22,10 @@ class AlbumAdapter : ListAdapter<Album, AlbumAdapter.ViewHolder>(AlbumDiffCallba
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Timber.d("onBindViewHolder: ${getItem(position)}")
         holder.bind(getItem(position))
     }
 
-    class ViewHolder(private val binding: ListItemAlbumBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: ListItemAlbumBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Album) {
             binding.album = item
