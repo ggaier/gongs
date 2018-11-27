@@ -13,10 +13,7 @@ import com.github.ggaier.gongs.ui.view.ViewStateVault
 import com.github.ggaier.gongs.util.obtainViewModel
 import com.github.ggaier.gongs.vo.Artist
 import org.jetbrains.anko.dip
-
-
-
-
+import timber.log.Timber
 
 /**
  * Created by wenbo, 2018/10/12
@@ -50,8 +47,12 @@ class ArtistAdapter : ListAdapter<Artist, ArtistAdapter.ViewHolder>(SingerDiffCa
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int, payloads: MutableList<Any>) {
-        super.onBindViewHolder(holder, position, payloads)
-//        Timber.d("onBindViewHolder with payloads: $payloads")
+        Timber.d("onBindViewHolder with payload: $payloads")
+        if (payloads.isEmpty()) {
+            onBindViewHolder(holder, position)
+        } else {
+            holder.rebind(getItem(position))
+        }
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -75,10 +76,13 @@ class ArtistAdapter : ListAdapter<Artist, ArtistAdapter.ViewHolder>(SingerDiffCa
         override fun restoreViewState(viewState: ViewState) {
             val lm = binding.albums.layoutManager
             if (lm is LinearLayoutManager) {
-                lm.scrollToPositionWithOffset(
-                    viewState.leftPosition,
-                    viewState.leftOffset
-                )
+                Timber.d("name: ${binding.singer?.name}, id: ${binding.singer?.id}, view state: $viewState")
+                binding.albums.post {
+                    lm.scrollToPositionWithOffset(
+                        viewState.leftPosition,
+                        viewState.leftOffset
+                    )
+                }
             }
         }
 
@@ -86,7 +90,15 @@ class ArtistAdapter : ListAdapter<Artist, ArtistAdapter.ViewHolder>(SingerDiffCa
             binding.singer = item
             val viewModel = (binding.root.context as AppCompatActivity).obtainViewModel(ArtistViewModel::class.java)
             binding.viewModel = viewModel
+            viewModel.loadReleases(item.id, false)
         }
+
+        fun rebind(item: Artist){
+            binding.singer = item
+            val viewModel = (binding.root.context as AppCompatActivity).obtainViewModel(ArtistViewModel::class.java)
+            binding.viewModel = viewModel
+        }
+
     }
 
     private class SingerDiffCallback : DiffUtil.ItemCallback<Artist>() {

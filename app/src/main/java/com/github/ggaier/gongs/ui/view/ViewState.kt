@@ -26,4 +26,9 @@ data class ViewState(
         leftPosition = position
         leftOffset = offset
     }
+
+    override fun toString(): String {
+        return "ViewState(id='$id', leftPosition=$leftPosition, leftOffset=$leftOffset)"
+    }
+
 }
