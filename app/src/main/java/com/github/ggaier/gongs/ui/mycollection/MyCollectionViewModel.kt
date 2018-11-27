@@ -25,7 +25,7 @@ class MyCollectionViewModel(private val context: Application, private val repo: 
     override val coroutineContext: CoroutineContext
         get() = job + Dispatchers.Main
 
-    val artists = ObservableArrayList<Artist>()
+    var artists = ObservableArrayList<Artist>()
     val loading = ObservableBoolean(false)
 
     fun getCollection(mbid: String) = launchSilent {

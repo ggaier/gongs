@@ -19,7 +19,6 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         model = obtainViewModel(MyCollectionViewModel::class.java)
         val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        binding.viewModel = model
         binding.activity = this
         binding.singers.addItemDecoration(
             DividerItemDecoration(
@@ -27,9 +26,7 @@ class MainActivity : BaseActivity() {
                 DividerItemDecoration.VERTICAL
             )
         )
-        binding.singers.adapter = ArtistAdapter()
+        binding.viewModel = model
         model.getCollection(BuildConfig.COLLECTION_ID)
     }
-
-
 }
