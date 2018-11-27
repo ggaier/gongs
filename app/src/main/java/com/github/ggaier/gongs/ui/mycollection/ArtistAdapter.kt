@@ -2,19 +2,21 @@ package com.github.ggaier.gongs.ui.mycollection
 
 import android.graphics.Color
 import android.graphics.drawable.ShapeDrawable
-import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.*
 import com.github.ggaier.gongs.databinding.ListItemArtistCollectionBinding
+import com.github.ggaier.gongs.ui.view.StateOwner
+import com.github.ggaier.gongs.ui.view.ViewState
+import com.github.ggaier.gongs.ui.view.ViewStateVault
 import com.github.ggaier.gongs.util.obtainViewModel
 import com.github.ggaier.gongs.vo.Artist
 import org.jetbrains.anko.dip
-import timber.log.Timber
+
+
+
+
 
 /**
  * Created by wenbo, 2018/10/12
@@ -22,7 +24,7 @@ import timber.log.Timber
 class ArtistAdapter : ListAdapter<Artist, ArtistAdapter.ViewHolder>(SingerDiffCallback()) {
 
     private val recyclerViewPool = RecyclerView.RecycledViewPool()
-    private val savedStates = HashMap<String, Parcelable?>()
+    private val viewStateVault = ViewStateVault<ViewState>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val context = parent.context
@@ -53,30 +55,37 @@ class ArtistAdapter : ListAdapter<Artist, ArtistAdapter.ViewHolder>(SingerDiffCa
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val item = getItem(position)
+        holder.bind(item)
+        holder.restoreViewState(viewStateVault.withdrawState(item.id)?:return)
     }
 
     override fun onViewRecycled(holder: ViewHolder) {
         super.onViewRecycled(holder)
-        val artist = getItem(holder.adapterPosition)
-        savedStates[artist.id] = holder.binding.albums.layoutManager?.onSaveInstanceState().also {
-//            Timber.d("onViewRecycled: ${artist.name}, state: ${it?.toString()}")
-            Timber.d("onViewRecycled: ${artist.name}, layoutManager: ${holder.binding.albums.layoutManager}")
-        }
+        viewStateVault.saveState(holder.getViewState())
     }
 
-    inner class ViewHolder(val binding: ListItemArtistCollectionBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(val binding: ListItemArtistCollectionBinding) : RecyclerView.ViewHolder(binding.root),
+        StateOwner<ViewState> {
+
+        override fun getViewState(): ViewState {
+            return ViewState(binding.singer?.id ?: "", binding.albums)
+        }
+
+        override fun restoreViewState(viewState: ViewState) {
+            val lm = binding.albums.layoutManager
+            if (lm is LinearLayoutManager) {
+                lm.scrollToPositionWithOffset(
+                    viewState.leftPosition,
+                    viewState.leftOffset
+                )
+            }
+        }
 
         fun bind(item: Artist) {
             binding.singer = item
             val viewModel = (binding.root.context as AppCompatActivity).obtainViewModel(ArtistViewModel::class.java)
             binding.viewModel = viewModel
-            with(binding.albums) {
-                viewModel.loadReleases(item.id, adapter?.itemCount ?: 0 > 0)
-                layoutManager?.onRestoreInstanceState(savedStates[item.id].apply {
-                    Timber.d("restore state: ${item.name}, state: $this")
-                })
-            }
         }
     }
 
